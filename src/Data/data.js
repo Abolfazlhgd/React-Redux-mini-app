@@ -4,6 +4,7 @@ export const Data = [
     title: "HP",
     image: "images/HP.jpg",
     price: 970,
+    quantity: 1,
   },
   {
     id: 2,
