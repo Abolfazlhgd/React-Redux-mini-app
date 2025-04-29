@@ -6,6 +6,10 @@ function Card() {
   const card = useSelector((store) => store);
   console.log(card);
   const dispatch = useDispatch();
+  const addition = (acc, currentValue) => {
+    return acc + currentValue.price * currentValue.quantity;
+  };
+  const total = card.reduce(addition, 0);
   return (
     <>
       <Navbar />
@@ -37,7 +41,7 @@ function Card() {
                     onClick={() =>
                       dispatch({ type: "INCREASE", payload: item })
                     }
-                    className="bg-red-600 text-white rounded-md px-2 hover:bg-red-700 transition-all"
+                    className="increase-btn bg-red-600 text-white rounded-md px-2 hover:bg-red-700 transition-all"
                   >
                     +
                   </button>
@@ -50,7 +54,7 @@ function Card() {
                         dispatch({ type: "REMOVE", payload: item });
                       }
                     }}
-                    className="bg-red-600 text-white rounded-md px-2 hover:bg-red-700 transition-all"
+                    className="decrease-btn bg-red-600 text-white rounded-md px-2 hover:bg-red-700 transition-all"
                   >
                     -
                   </button>
@@ -59,6 +63,9 @@ function Card() {
             </div>
           );
         })}
+      </div>
+      <div className="total-value flex items-center justify-center p-1 bg-red-500 rounded-sm w-1/3 mx-auto">
+        <p className="font-semibold text-white">total: {total} $</p>
       </div>
     </>
   );

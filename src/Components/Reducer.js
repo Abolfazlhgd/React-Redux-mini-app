@@ -1,8 +1,8 @@
 const Reducer = (card = [], action) => {
   if (action.type === "ADD") {
-    let tempcard = card.filter((item) => item.id === action.payload.id);
-    if (tempcard < 1) {
-      return [...card, action.payload];
+    let numCard = card.filter((item) => item.id === action.payload.id);
+    if (numCard < 1) {
+      return [...card, { ...action.payload, quantity: 1 }]; // Initialize quantity here
     } else {
       alert("it has to be");
       return card;
@@ -12,22 +12,22 @@ const Reducer = (card = [], action) => {
     return card.filter((item) => item.id !== action.payload.id);
   }
   if (action.type === "INCREASE") {
-    let tempcard = card.map((item) => {
+    let numCard = card.map((item) => {
       if (item.id === action.payload.id) {
         return { ...item, quantity: item.quantity + 1 };
       }
       return item;
     });
-    return tempcard;
+    return numCard;
   }
   if (action.type === "DECREASE") {
-    let tempcard = card.map((item) => {
+    let numCard = card.map((item) => {
       if (item.id === action.payload.id) {
         return { ...item, quantity: item.quantity - 1 };
       }
       return item;
     });
-    return tempcard;
+    return numCard;
   }
   return card;
 };
